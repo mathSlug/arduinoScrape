@@ -6,6 +6,8 @@ library(markdown)
 library(knitr)
 library(DT)
 library(car)
+library(wordcloud)
+library(ngram)
 
 #load data
 ard_data = read.csv("data/ard_data.csv", header = TRUE)
@@ -53,7 +55,8 @@ predict_data = use_data[,!(names(use_data) %in% c("Respects","Views",
                                                   "Description", "Creator"))]
 
 
-
+# Make the wordcloud drawing predictable during a session
+wordcloud_rep <- repeatable(wordcloud)
 
 
 

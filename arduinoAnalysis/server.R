@@ -48,4 +48,38 @@ shinyServer(function(input, output, session) {
     )
   })
   
+  
+  output$cloud = renderPlot({
+    
+    in_selected_topics = apply(select(use_data, input$checkgroup3), 1, max)
+    
+    cloud_data = filter(use_data, in_selected_topics == 1)
+    
+    print(str(cloud_data))
+    
+    all_descr = paste(cloud_data$Description, collapse = ' ')
+    
+    ng = ngram(all_descr, n = as.numeric(input$ngrams), sep = ' ,.-;?!')
+    ng_table = get.phrasetable(ng)
+    
+    if(as.numeric(input$ngrams) == 1) {
+      ng_table = ng_table[!(ng_table$ngrams %in%
+                              c("to ","a ","and ","with ","an ", "the ",
+                                "for ","of ","is ")),]
+    }
+    
+    max_size = floor(12/(as.numeric(input$ngrams))) - 1 *
+      (as.numeric(input$ngrams) == 2 | as.numeric(input$ngrams) == 3)
+    
+    print(ng_table)
+    
+    wordcloud_rep(ng_table$ngrams, ng_table$freq, max.words = as.numeric(input$words),
+                  scale = c(max_size,.5),
+                  colors = brewer.pal(8,"Set1"),
+                  random.order = FALSE)
+    
+    
+  })
+  
+  
 })

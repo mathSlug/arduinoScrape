@@ -15,7 +15,9 @@ dashboardPage(skin = "black",
       menuItem("Model Construction", tabName = "construction",
                icon = icon("refresh", lib = "glyphicon")),
       menuItem("Prediction", tabName = "prediction",
-               icon = icon("sort", lib = "glyphicon"))
+               icon = icon("sort", lib = "glyphicon")),
+      menuItem("Word Cloud", tabName = "wordcloud",
+               icon = icon("cloud", lib = "glyphicon"))
     )
   ),
   
@@ -97,9 +99,24 @@ dashboardPage(skin = "black",
                                      choices = 0:max(use_data$Projects),
                                      selected = 0))),
             fluidRow(infoBoxOutput("infobox", width = '100%'))
-            
-            
-      
+            ),
+    
+    tabItem(tabName = "wordcloud",
+            fluidRow(box(checkboxGroupInput("checkgroup3",
+                                            h3("Select Topics to Include in Cloud"),
+                                            inline = TRUE,
+                                            choices = selected_topics,
+                                            selected = selected_topics),
+                         width = '100%')),
+            fluidRow(box(selectInput("ngrams",
+                                     label = "Enter N for N-gram Choice",
+                                     choices = 1:4,
+                                     selected = 2)),
+                     box(selectInput("words",
+                                     label = "Enter Maximum Number of N-grams",
+                                     choices = 10:175,
+                                     selected = 50))),
+            fluidRow(box(plotOutput("cloud", height = 600), width = '100%', height = 600))
     )
             
     
