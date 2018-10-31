@@ -1,0 +1,13 @@
+name: arduinoAnalysis
+title: arduinoAnalysis
+username:
+account: mathslug
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 544139
+bundleId: 1673384
+url: https://mathslug.shinyapps.io/arduinoAnalysis/
+when: 1540956107.69067
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .RData|data/.DS_Store|www/.DS_Store
