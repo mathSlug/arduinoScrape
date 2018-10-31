@@ -15,7 +15,7 @@ shinyServer(function(input, output, session) {
   
   output$VFIS = renderDataTable({
     this_data = select(predict_data, append(c("RespectPerView"), input$checkgroup))
-    model2 = lm(RespectPerView ~ ., data = this_data)
+    model2 = lm(log(RespectPerView) ~ ., data = this_data)
     
     these_vfis = vif(model2)
     datatable(data.frame(these_vfis))
@@ -23,7 +23,7 @@ shinyServer(function(input, output, session) {
   
   output$summary = renderPrint({
     this_data = select(predict_data, append(c("RespectPerView"), input$checkgroup))
-    model2 = lm(RespectPerView ~ ., data = this_data)
+    model2 = lm(log(RespectPerView) ~ ., data = this_data)
     
     capture.output(summary(model2))
   })
@@ -31,7 +31,7 @@ shinyServer(function(input, output, session) {
   
   output$infobox = renderInfoBox({
     this_data = select(predict_data, append(c("RespectPerView"), input$checkgroup))
-    model2 = lm(RespectPerView ~ ., data = this_data)
+    model2 = lm(log(RespectPerView) ~ ., data = this_data)
     
     new_dat = predict_data[1,]
     new_dat[1,] = 0

@@ -18,7 +18,7 @@ ard_data$Followers = as.numeric(ard_data$Followers)
 ard_data$Projects = as.numeric(ard_data$Projects)
 ard_data$Respects = as.numeric(ard_data$Respects)
 ard_data$Views = as.numeric(ard_data$Views)
-ard_data = ard_data %>% mutate(., RespectPerView = log(round(Respects / Views, 5)))
+ard_data = ard_data %>% mutate(., RespectPerView = round(Respects / Views, 5))
 
 #create boolean columns for each topic
 names_topics = ard_data %>% transmute(.,
