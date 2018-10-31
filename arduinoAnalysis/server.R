@@ -40,7 +40,8 @@ shinyServer(function(input, output, session) {
     new_dat$Followers = as.numeric(input$followers)
     new_dat$Project = as.numeric(input$projects)
     
-    prediction = predict(model2, newdata = new_dat)
+    #exp to get back to normal ResultPerView val
+    prediction = exp(predict(model2, newdata = new_dat))
     
     infoBox(
       "Predicted Respects Per Views", prediction, icon = icon("list"),
