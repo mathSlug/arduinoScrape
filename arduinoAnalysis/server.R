@@ -38,7 +38,7 @@ shinyServer(function(input, output, session) {
     new_dat[1,names(new_dat) %in% input$checkgroup2] = 1
     
     new_dat$Followers = as.numeric(input$followers)
-    new_dat$Project = as.numeric(input$projects)
+    new_dat$Projects = as.numeric(input$projects)
     
     #exp to get back to normal ResultPerView val
     prediction = exp(predict(model2, newdata = new_dat))
